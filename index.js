@@ -5,7 +5,7 @@ const app = express()
 
 const APP_PORT = 3000
 const { BOT_TOKEN } = process.env
-const CURRENT_HOST = ''
+const CURRENT_HOST = 'https://pusher-vercel.vercel.app'
 
 const bot = new Telegraf(BOT_TOKEN, {
   telegram: {
