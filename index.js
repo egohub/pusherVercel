@@ -33,6 +33,18 @@ bot.action('Livescore', (ctx) => {
 bot.command('Livescore', (ctx) => {
     ctx.reply("livescore")
 })
+bot.action('stream', async(ctx) => {
+    const jsonStr = await (await fetch(`${apiUrl}/stream`)).json();
+    jsonStr.forEach((ele) => {
+        let matches = `${ele.home_team} ${ele.home_score} - ${ele.away_score} ${ele.away_team}`;
+        ctx.reply(
+            matches,
+            Markup.inlineKeyboard([
+                [Markup.button.url(" Stream Link ", ele.live_url[0].url)]
+            ])
+        )
+    })
+})
 /*
 //livescore
 bot.action('Livescore', async(ctx) => {
