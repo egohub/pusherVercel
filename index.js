@@ -27,6 +27,13 @@ bot.command('start', (ctx) => {
     })
 });
 
+bot.action('Livescore', async(ctx) => {
+    ctx.reply("livescore")
+});
+bot.command('Livescore', async(ctx) => {
+    ctx.reply("livescore")
+})
+/*
 //livescore
 bot.action('Livescore', async(ctx) => {
     const jsonStr = await (await fetch(`${apiUrl}/livescore`)).json();
@@ -108,7 +115,7 @@ bot.command('rtmp', async(ctx) => {
     })
 })
 
-
+*/
 app.use(bot.webhookCallback('/callback'))
 
 app.get('/', async (_req, res) => {
