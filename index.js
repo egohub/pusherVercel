@@ -27,26 +27,6 @@ bot.command('start', (ctx) => {
     })
 });
 
-bot.action('Livescore', (ctx) => {
-    ctx.reply("livescore")
-});
-bot.command('Livescore', (ctx) => {
-    ctx.reply("livescore")
-})
-bot.action('stream', async(ctx) => {
-    const jsonStr = await (await fetch(`${apiUrl}/stream`)).json();
-    jsonStr.forEach((ele) => {
-        let matches = `${ele.home_team} ${ele.home_score} - ${ele.away_score} ${ele.away_team}`;
-        ctx.reply(
-            matches,
-            Markup.inlineKeyboard([
-                [Markup.button.url(" Stream Link ", ele.live_url[0].url)]
-            ])
-        )
-    })
-})
-/*
-//livescore
 bot.action('Livescore', async(ctx) => {
     const jsonStr = await (await fetch(`${apiUrl}/livescore`)).json();
     jsonStr.list.forEach((ele) => {
@@ -59,41 +39,7 @@ bot.action('Livescore', async(ctx) => {
         })
     })
 })
-bot.command('livescore', async(ctx) => {
-    const jsonStr = await (await fetch(`${apiUrl}/livescore`)).json();
-    jsonStr.list.forEach((ele) => {
-        let matches = `${ele.home_team} ${ele.home_score} - ${ele.away_score} ${ele.away_team}`;
-        ctx.reply(matches, {
-            ...Markup.inlineKeyboard([
-                Markup.button.callback(" Status ", `details_${ele.match_id}`),
-                Markup.button.callback(" Line-up ", "lineup")
-            ])
-        })
-    })
-
-})
-bot.action(/details_+/, (ctx) => {
-    console.log(ctx.match.input);
-    ctx.deleteMessage();
-    let id = ctx.match.input.split('_')[1]
-    ctx.reply('this feature will sonn..  ' + id)
-})
-
-//stream
 bot.action('stream', async(ctx) => {
-    const jsonStr = await (await fetch(`${apiUrl}/stream`)).json();
-    jsonStr.forEach((ele) => {
-        let matches = `${ele.home_team} ${ele.home_score} - ${ele.away_score} ${ele.away_team}`;
-        ctx.reply(
-            matches,
-            Markup.inlineKeyboard([
-                [Markup.button.url(" Stream Link ", ele.live_url[0].url)]
-            ])
-        )
-    })
-})
-
-bot.command('stream', async(ctx) => {
     const jsonStr = await (await fetch(`${apiUrl}/stream`)).json();
     jsonStr.forEach((ele) => {
         let matches = `${ele.home_team} ${ele.home_score} - ${ele.away_score} ${ele.away_team}`;
@@ -126,6 +72,70 @@ bot.command('rtmp', async(ctx) => {
         ctx.reply(matches, { parse_mode: 'HTML' })
     })
 })
+
+bot.action(/details_+/, (ctx) => {
+    console.log(ctx.match.input);
+    ctx.deleteMessage();
+    let id = ctx.match.input.split('_')[1]
+    ctx.reply('this feature will sonn..  ' + id)
+})
+
+/*
+//livescore
+bot.action('Livescore', async(ctx) => {
+    const jsonStr = await (await fetch(`${apiUrl}/livescore`)).json();
+    jsonStr.list.forEach((ele) => {
+        let matches = `${ele.home_team} ${ele.home_score} - ${ele.away_score} ${ele.away_team}`;
+        ctx.reply(matches, {
+            ...Markup.inlineKeyboard([
+                Markup.button.callback(" Status ", `details_${ele.match_id}`),
+                Markup.button.callback(" Line-up ", "lineup")
+            ])
+        })
+    })
+})
+bot.command('livescore', async(ctx) => {
+    const jsonStr = await (await fetch(`${apiUrl}/livescore`)).json();
+    jsonStr.list.forEach((ele) => {
+        let matches = `${ele.home_team} ${ele.home_score} - ${ele.away_score} ${ele.away_team}`;
+        ctx.reply(matches, {
+            ...Markup.inlineKeyboard([
+                Markup.button.callback(" Status ", `details_${ele.match_id}`),
+                Markup.button.callback(" Line-up ", "lineup")
+            ])
+        })
+    })
+
+})
+
+//stream
+bot.action('stream', async(ctx) => {
+    const jsonStr = await (await fetch(`${apiUrl}/stream`)).json();
+    jsonStr.forEach((ele) => {
+        let matches = `${ele.home_team} ${ele.home_score} - ${ele.away_score} ${ele.away_team}`;
+        ctx.reply(
+            matches,
+            Markup.inlineKeyboard([
+                [Markup.button.url(" Stream Link ", ele.live_url[0].url)]
+            ])
+        )
+    })
+})
+
+bot.command('stream', async(ctx) => {
+    const jsonStr = await (await fetch(`${apiUrl}/stream`)).json();
+    jsonStr.forEach((ele) => {
+        let matches = `${ele.home_team} ${ele.home_score} - ${ele.away_score} ${ele.away_team}`;
+        ctx.reply(
+            matches,
+            Markup.inlineKeyboard([
+                [Markup.button.url(" Stream Link ", ele.live_url[0].url)]
+            ])
+        )
+    })
+})
+
+
 
 */
 app.use(bot.webhookCallback('/callback'))
