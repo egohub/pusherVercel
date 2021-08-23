@@ -27,10 +27,10 @@ bot.command('start', (ctx) => {
     })
 });
 
-bot.action('Livescore', async(ctx) => {
+bot.action('Livescore', (ctx) => {
     ctx.reply("livescore")
 });
-bot.command('Livescore', async(ctx) => {
+bot.command('Livescore', (ctx) => {
     ctx.reply("livescore")
 })
 /*
